@@ -98,15 +98,12 @@ export default function Quiz() {
         */
     //update method using id, should be faster than previous method
     if (quizData[id].chosenAnswer) return
-    console.log(quizData[id])
     setQuizData(prevData => {
       let newData = [...prevData]
       newData[id].chosenAnswer = choice
       return newData
     })
   }
-
-  //   console.log(quizData)
 
   //subject to change based on backend
   function submitAnswers() {

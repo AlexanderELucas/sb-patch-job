@@ -17,8 +17,6 @@ export default function Question(props) {
     }
     let chosenAnswerStyle
 
-    console.log(props.choices[props.answer])
-
     const renderChosenAnswerStyle = () => {
       const { answer, choices, chosenAnswer } = props
       if (choices[answer] === chosenAnswer) {
