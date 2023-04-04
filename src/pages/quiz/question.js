@@ -6,33 +6,10 @@ import './question.css'
 export default function Question(props){
     let answerElements = ""
     //might be a better way to deal with changing answer style
-    if(props.type === 'mcq'){
-        const answerStyle = {
-            border: "2px solid blue",
-            borderRadius: '5px',
-            paddingTop: '3px',
-            paddingBottom: '3px',
-            paddingLeft: '6px',
-            paddingRight: '6px',
-            backgroundColor:'white',
-        }
-        const chosenAnswerStyle = {
-            ...answerStyle,
-            backgroundColor: "#b7eef5"
-        }
-        
-        answerElements = props.choices.map(answer => (<p
-                key={answer}
-                className="question"
-                style={answer===props.chosenAnswer?chosenAnswerStyle:answerStyle}
-                onClick={()=>props.chooseAnswer(props.id, answer)}
-            >
-                {answer}
-            </p>))
-
-    }
-    let chosenAnswerStyle
-
+    let chosenAnswerStyle;
+    let answerStyle;
+    
+    //Renders red for wrong answer green for correct answer
     const renderChosenAnswerStyle = () => {
       const { answer, choices, chosenAnswer } = props
       if (choices[answer] === chosenAnswer) {
@@ -47,6 +24,31 @@ export default function Question(props){
         })
       }
     }
+    
+    if(props.type === 'mcq'){
+        answerStyle = {
+            border: "2px solid blue",
+            borderRadius: '5px',
+            paddingTop: '3px',
+            paddingBottom: '3px',
+            paddingLeft: '6px',
+            paddingRight: '6px',
+            backgroundColor:'white',
+        }
+        
+        
+        answerElements = props.choices.map(answer => (<p
+                key={answer}
+                className='question'
+                style={answer===props.chosenAnswer ? renderChosenAnswerStyle() : answerStyle}
+                onClick={()=>props.chooseAnswer(props.id, answer)}
+            >
+                {answer}
+            </p>))
+
+    }
+
+    
 
     return (
         <div>
